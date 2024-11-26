@@ -1,0 +1,15 @@
+{
+    "name": "vendor/tseventplugin",
+    "description": "Event Plugin",
+    "authors": [
+        {
+            "name": "Tuba"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "TSEventPlugin\\": "includes/"
+        }
+    }
+}
