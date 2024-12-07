@@ -8,9 +8,7 @@ class Core {
     public function init() {
         add_action( 'init', [ __CLASS__, 'register_event_post_type' ] );
         add_action( 'init', [ __CLASS__, 'register_event_taxonomies' ] );
-        add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_scripts' ] );
-        echo "Core File loaded!<br>";
-        echo "Current file: " . basename(__FILE__) . "<br>";
+        //add_action( 'wp_enqueue_scripts', [ __CLASS__, 'enqueue_scripts' ] );
         function run_shortcode() {
             $shortcode = new Shortcodes();
             $shortcode->init();
@@ -52,7 +50,7 @@ class Core {
     }
     public static function events_plugin_get_template($template, $data = []) {
         // Locate the template file in your plugin's templates folder
-        $template_path = plugin_dir_path(__DIR__) . 'templates/' . $template;
+        $template_path = plugin_dir_path(__DIR__) . '../templates/' . $template;
     
         if (file_exists($template_path)) {
             // Extract data to variables for use in the template

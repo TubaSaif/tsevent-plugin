@@ -1,7 +1,6 @@
 <?php
 // Add a settings menu page with a priority of 10 (default is 10)
 add_action('admin_menu', function () {
-    error_log('Adding Events Plugin Settings page to the menu');
     add_options_page(
         'Events Plugin Settings',
         'Events Plugin',

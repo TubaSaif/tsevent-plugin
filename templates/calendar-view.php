@@ -26,12 +26,7 @@
 // wp_reset_postdata();
 
 ?>
-<div style="background-color: <?php echo esc_attr($theme_color); ?>">
-    <h1>Event Template</h1>
-    <?php foreach ($events as $event) : ?>
-        <p><?php echo esc_html($event->post_title); ?></p>
-    <?php endforeach; ?>
-</div>
+
 
 <!-- <div class="calendar-view">
     <h2>Event Calendar</h2>
