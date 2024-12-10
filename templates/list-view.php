@@ -27,7 +27,7 @@ if (!$events_query->have_posts()) {
 
 <div style="background-color: <?php echo esc_attr($theme_color); ?>">
     <h1>Event Template List</h1>
-
+    <div id="event-search-results">
     <?php if ($events_query->have_posts()) : ?>
         <?php while ($events_query->have_posts()) : $events_query->the_post(); ?>
             <p><?php echo esc_html(get_the_title()); ?></p>
@@ -35,6 +35,6 @@ if (!$events_query->have_posts()) {
     <?php else : ?>
         <p>No events found.</p>
     <?php endif; ?>
-
+    </div>
     <?php wp_reset_postdata(); ?>
 </div>

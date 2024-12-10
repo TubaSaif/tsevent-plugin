@@ -26,7 +26,7 @@ class Shortcodes {
             <input type="text" id="event-search-input" placeholder="Search Events" />
             <button type="submit">Search</button>
         </form>
-        <div id="event-search-results"></div>
+        <!-- <div id="event-search-results"></div> -->
         <?php
         // Further PHP logic goes here
        
