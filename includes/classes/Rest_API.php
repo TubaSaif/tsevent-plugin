@@ -27,9 +27,11 @@ class Rest_API {
         if ( $query->have_posts() ) {
             while ( $query->have_posts() ) {
                 $query->the_post();
+                $event_date = get_post_meta(get_the_ID(), '_event_date', true);
                 $events[] = [
                     'title' => get_the_title(),
-                    'link'  => get_permalink(),
+                    'url'  => get_permalink(),
+                    'start'  => $event_date,
                 ];
             }
             wp_reset_postdata();
@@ -40,7 +42,9 @@ class Rest_API {
     public static function my_enqueue_scripts() {
         // Enqueue the main script for the plugin
         wp_enqueue_script( 'events-plugin-script', EVENTS_PLUGIN_URL . 'assets/src/js/restsearch.js', ['jquery'], '1.0', true );
-        
+        // Enqueue jQuery UI for the datepicker
+        wp_enqueue_script('jquery-ui-datepicker');
+        wp_enqueue_style('jquery-ui-datepicker-style', 'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css'); // External jQuery UI CSS
         // Localize the script with data
         wp_localize_script(
             'events-plugin-script', // Use the same handle as the script

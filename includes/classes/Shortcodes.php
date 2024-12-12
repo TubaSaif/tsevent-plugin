@@ -5,13 +5,26 @@ use TSEventPlugin\classes\Core;
 
 class Shortcodes {
     public static function init() {
-        add_shortcode('tsevent_display', [__CLASS__, 'render_events']);
-        //add_action('wp_enqueue_scripts', [ __CLASS__, 'my_enqueue_scripts']);
+        add_shortcode('tsevent_search', [__CLASS__, 'render_search_form']);
+        add_shortcode('tsevent_view', [__CLASS__, 'render_events']);
     }
-    // public static function my_enqueue_scripts() {
-    //     wp_enqueue_script( 'events-plugin-script', EVENTS_PLUGIN_URL . 'assets/src/js/restsearch.js', ['jquery'], '1.0', true );
-        
-    // }
+
+    // Render the event search form
+    public static function render_search_form($atts) {
+        ob_start();
+        ?>
+        <form id="event-search-form">
+            <input type="text" id="event-search-input" placeholder="Search Events" />
+            <!-- Date picker input field -->
+            <input type="text" id="event-date-input" placeholder="Select Event Date" />
+            <button type="submit">Search</button>
+        </form>
+        <!-- <div id="event-search-results"></div>  -->
+        <?php
+        return ob_get_clean();
+    }
+
+    // Render the event list or calendar view
     public static function render_events($atts) {
         $atts = shortcode_atts(
             [
@@ -19,28 +32,14 @@ class Shortcodes {
                 'theme_color' => get_option('events_plugin_theme_color', '#ffffff'),
             ],
             $atts,
-            'tsevent_display'
+            'tsevent_view'
         );
-        ?>
-        <form id="event-search-form">
-            <input type="text" id="event-search-input" placeholder="Search Events" />
-            <button type="submit">Search</button>
-        </form>
-        <!-- <div id="event-search-results"></div> -->
-        <?php
-        // Further PHP logic goes here
-       
-        
 
-       // error_log('View: ' . get_option('events_plugin_view'));
-       // error_log('Theme Color: ' . get_option('events_plugin_theme_color'));
-        $events = Core::get_events(); // General query logic here
+        // Template selection based on the 'view' attribute
         $template = ($atts['view'] === 'calendar') ? 'calendar-view.php' : 'list-view.php';
-       // error_log('View: ' .$events );
-       // error_log('View: ' .$template);
+        
         ob_start();
         Core::events_plugin_get_template($template, [
-            'events' => $events,
             'theme_color' => $atts['theme_color'],
         ]);
         return ob_get_clean();

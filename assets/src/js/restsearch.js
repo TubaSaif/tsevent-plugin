@@ -1,8 +1,8 @@
 jQuery(function($) {
     $('#event-search-form').on('submit', function(e) {
-        e.preventDefault(); // Prevent the form from submitting the traditional way
+        e.preventDefault(); 
 
-        var keyword = $('#event-search-input').val(); // Get the search term from the input field
+        var keyword = $('#event-search-input').val(); 
 
         if (keyword.length === 0) {
             $('#event-search-results').html('<p>Please enter a search term.</p>');
@@ -23,9 +23,8 @@ jQuery(function($) {
                 var resultsHTML = '';
 
                 if (response.length > 0) {
-                    // Loop through the search results and display them
                     response.forEach(function(event) {
-                        resultsHTML += '<p><a href="' + event.link + '">' + event.title + '</a></p>';
+                        resultsHTML += '<p><a href="' + event.url + '">' + event.title + '</a></p>'+ event.start ;
                     });
                 } else {
                     resultsHTML = '<p>No events found.</p>';
