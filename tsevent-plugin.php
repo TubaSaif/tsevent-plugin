@@ -29,8 +29,7 @@ function run_eventrest() {
     $eventrest = new Rest_API();
     $eventrest->init(); 
 }
-run_eventrest();
-
+run_eventrest(); 
 // Define constants
 define( 'EVENTS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'EVENTS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

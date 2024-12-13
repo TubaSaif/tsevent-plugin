@@ -1,3 +1,5 @@
+console.log('restsearch.js loaded successfully.');
+
 jQuery(function($) {
     $('#event-search-form').on('submit', function(e) {
         e.preventDefault(); 
@@ -5,7 +7,7 @@ jQuery(function($) {
         var keyword = $('#event-search-input').val(); 
 
         if (keyword.length === 0) {
-            $('#event-search-results').html('<p>Please enter a search term.</p>');
+            $('#dropdown-result').html('<p>Please enter a search term.</p>');
             return;
         }
 
@@ -24,18 +26,20 @@ jQuery(function($) {
 
                 if (response.length > 0) {
                     response.forEach(function(event) {
-                        resultsHTML += '<p><a href="' + event.url + '">' + event.title + '</a></p>'+ event.start ;
+                        resultsHTML += `<p><a href="${event.url}">${event.title}</a></p>${event.start}` ;
                     });
                 } else {
                     resultsHTML = '<p>No events found.</p>';
                 }
 
                 // Update the search results container with the results
-                $('#event-search-results').html(resultsHTML);
+                $('#dropdown-result').html(resultsHTML);
+                // $('#dropdown-result').html('<p>Test content</p>');
+
             },
             error: function() {
                 console.error('An error occurred while fetching events.'); 
-                $('#event-search-results').html('<p>An error occurred. Please try again.</p>');
+                $('#dropdown-result').html('<p>An error occurred. Please try again.</p>');
             }
         });
     });

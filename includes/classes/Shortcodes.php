@@ -13,12 +13,15 @@ class Shortcodes {
     public static function render_search_form($atts) {
         ob_start();
         ?>
-        <form id="event-search-form">
-            <input type="text" id="event-search-input" placeholder="Search Events" />
-            <!-- Date picker input field -->
-            <input type="text" id="event-date-input" placeholder="Select Event Date" />
-            <button type="submit">Search</button>
-        </form>
+        <div id="search-container">
+            <form id="event-search-form">
+                <input type="text" id="event-search-input" placeholder="Search Events" />
+                <!-- Date picker input field -->
+                <!-- <input type="date" id="event-date-input" placeholder="Select Event Date" /> -->
+                <button type="submit">Search</button>
+            </form>
+            <div id="dropdown-result"></div> 
+        </div>
         <!-- <div id="event-search-results"></div>  -->
         <?php
         return ob_get_clean();

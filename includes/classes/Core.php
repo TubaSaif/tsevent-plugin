@@ -135,9 +135,9 @@ class Core {
         return $query->posts;
     }
     public static function enqueue_scripts() {
-       // wp_enqueue_style( 'events-plugin-style', EVENTS_PLUGIN_URL . 'assets/dist/main.css', [], '1.0' );
+       wp_enqueue_style( 'events-plugin-style', EVENTS_PLUGIN_URL . 'assets/src/css/public.css', [], '1.0' );
        // wp_enqueue_script( 'events-plugin-script', EVENTS_PLUGIN_URL . 'assets/dist/main.bundle.js', [ 'jquery' ], '1.0', true );
-        wp_enqueue_script( 'events-plugin-script', 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js');
+       // wp_enqueue_script( 'events-plugin-script', 'https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js');
     }
 
 }
