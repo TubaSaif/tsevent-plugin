@@ -18,6 +18,10 @@ jQuery(function($) {
                 keyword: keyword,
                 date: date, // Pass the selected date
             },
+            beforeSend: function () {
+                // Show the loader before the AJAX request starts
+                $("#loader").show();
+            },
             success: function(response) {
                 console.log('Response:', response);
 
@@ -57,6 +61,10 @@ jQuery(function($) {
             error: function() {
                 console.error('An error occurred while fetching events.');
                 $('#dropdown-result').html('<p>An error occurred. Please try again.</p>');
+            },
+            complete: function () {
+                // Hide the loader after the AJAX request is finished
+                $("#loader").hide();
             }
         });
     });

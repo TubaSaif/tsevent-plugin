@@ -8,7 +8,6 @@ class Shortcodes {
         add_shortcode('tsevent_search', [__CLASS__, 'render_search_form']);
         add_shortcode('tsevent_view', [__CLASS__, 'render_events']);
     }
-
     // Render the event search form
     public static function render_search_form($atts) {
         ob_start();
@@ -16,6 +15,9 @@ class Shortcodes {
         <div id="search-container">
             <form id="event-search-form">
                 <input type="text" id="event-search-input" placeholder="Search Events" />
+                <div id="loader" style="display: none;">
+                <img src="<?php echo esc_url( EVENTS_PLUGIN_URL . 'assets/src/images/loader.gif' ); ?>" alt="Loading..."/>
+                </div>
                 <!-- Date picker input field -->
                 <input type="date" id="event-date-input" placeholder="Select Event Date" /> 
                 <button type="submit">Search</button>
@@ -26,7 +28,6 @@ class Shortcodes {
         <?php
         return ob_get_clean();
     }
-
     // Render the event list or calendar view
     public static function render_events($atts) {
         $atts = shortcode_atts(
