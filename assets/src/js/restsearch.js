@@ -22,13 +22,28 @@ jQuery(function($) {
                 console.log('Response:', response);
 
                 var resultsHTML = '';
+                var showViewAllButton = false;  // To control the display of the "View All" button
 
                 if (response.length > 0) {
-                    response.forEach(function(event) {
-                        resultsHTML += `<p><a href="${event.url}">${event.title}</a> - ${event.start}</p>`;
-                    });
+                    // Loop through the events and display the first 4
+                    for (var i = 0; i < response.length; i++) {
+                        if (i < 4) {
+                            resultsHTML += `<p><a href="${response[i].url}">${response[i].title}</a> - ${response[i].start}</p>`;
+                        } else {
+                            showViewAllButton = true;  // Show the "View All" button after 4 events
+                        }
+                    }
+
+                    // If there are more than 4 events, show the "View All" button
+                    if (showViewAllButton) {
+                        var viewAllUrl = myScriptData.view_all_url + '?s=' + encodeURIComponent(keyword);
+                        // if (date) {
+                        //     viewAllUrl += '&date=' + encodeURIComponent(date);
+                        // }
+                        resultsHTML += '<p><a href="' + viewAllUrl + '" class="view-all-button">View All Events</a></p>';
+                    }
                 } else {
-                    // Display a specific message if no events are found
+                    // Display a message if no events are found
                     if (date) {
                         resultsHTML = `<p>No events found on ${date}.</p>`;
                     } else {

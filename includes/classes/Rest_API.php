@@ -71,6 +71,7 @@ class Rest_API {
                 'ajax_url' => admin_url('admin-ajax.php'), 
                 'site_url' => site_url(), 
                 'rest_url' => esc_url( rest_url( 'events-plugin/v1/search' ) ), 
+                'view_all_url'=> 'http://localhost/themecheck/events', // URL for the "View All" button
             ]
         );
     }

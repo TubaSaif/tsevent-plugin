@@ -1,7 +1,7 @@
 <?php
-if (!defined('ABSPATH')) {
-    exit; // Exit if accessed directly.
-}
+// if (!defined('ABSPATH')) {
+//     exit; // Exit if accessed directly.
+// }
 
 // Define theme color if not set
 $theme_color = $theme_color ?? '#ffffff';

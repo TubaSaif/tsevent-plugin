@@ -25,6 +25,7 @@ class Core {
         } else {
             error_log('Custom file not found: ' . $file_path);
         }
+        include plugin_dir_path(__DIR__) . 'templates/page-view.php' ;
     }
     // Function to register the 'event' custom post type
     public static function register_event_post_type() {
