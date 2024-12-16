@@ -17,7 +17,7 @@ class Shortcodes {
             <form id="event-search-form">
                 <input type="text" id="event-search-input" placeholder="Search Events" />
                 <!-- Date picker input field -->
-                <!-- <input type="date" id="event-date-input" placeholder="Select Event Date" /> -->
+                <input type="date" id="event-date-input" placeholder="Select Event Date" /> 
                 <button type="submit">Search</button>
             </form>
             <div id="dropdown-result"></div> 

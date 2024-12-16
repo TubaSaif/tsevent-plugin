@@ -1,10 +1,9 @@
-console.log('restsearch.js loaded successfully.');
-
 jQuery(function($) {
     $('#event-search-form').on('submit', function(e) {
-        e.preventDefault(); 
+        e.preventDefault();
 
-        var keyword = $('#event-search-input').val(); 
+        var keyword = $('#event-search-input').val();
+        var date = $('#event-date-input').val(); // Get the selected date
 
         if (keyword.length === 0) {
             $('#dropdown-result').html('<p>Please enter a search term.</p>');
@@ -16,29 +15,32 @@ jQuery(function($) {
             url: myScriptData.rest_url,
             method: 'GET',
             data: {
-                keyword: keyword, // Pass the keyword to the API
+                keyword: keyword,
+                date: date, // Pass the selected date
             },
             success: function(response) {
-                console.log('Response:', response); 
-                console.log(myScriptData.rest_url);
+                console.log('Response:', response);
 
                 var resultsHTML = '';
 
                 if (response.length > 0) {
                     response.forEach(function(event) {
-                        resultsHTML += `<p><a href="${event.url}">${event.title}</a></p>${event.start}` ;
+                        resultsHTML += `<p><a href="${event.url}">${event.title}</a> - ${event.start}</p>`;
                     });
                 } else {
-                    resultsHTML = '<p>No events found.</p>';
+                    // Display a specific message if no events are found
+                    if (date) {
+                        resultsHTML = `<p>No events found on ${date}.</p>`;
+                    } else {
+                        resultsHTML = '<p>No events found.</p>';
+                    }
                 }
 
-                // Update the search results container with the results
+                // Update the search results container
                 $('#dropdown-result').html(resultsHTML);
-                // $('#dropdown-result').html('<p>Test content</p>');
-
             },
             error: function() {
-                console.error('An error occurred while fetching events.'); 
+                console.error('An error occurred while fetching events.');
                 $('#dropdown-result').html('<p>An error occurred. Please try again.</p>');
             }
         });

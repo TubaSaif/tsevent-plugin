@@ -14,30 +14,50 @@ class Rest_API {
     }
 
     public static function search_events( $request ) {
-        
+        $keyword = $request->get_param( 'keyword' );
+        $date = $request->get_param( 'date' );
+    
         $query_args = [
-            'post_type' => 'event', 
-            's'         => $request->get_param( 'keyword' ), 
+            'post_type' => 'event',
+            's'         => $keyword,
+            'meta_query' => [],
         ];
-
+    
+        if ( $date ) {
+            $query_args['meta_query'][] = [
+                'key'     => '_event_date',
+                'value'   => $date,
+                'compare' => '=',
+                'type'    => 'DATE',
+            ];
+        }
+    
         $query = new \WP_Query( $query_args );
         $events = [];
-
+    
         if ( $query->have_posts() ) {
             while ( $query->have_posts() ) {
                 $query->the_post();
-                $event_date = get_post_meta(get_the_ID(), '_event_date', true);
+                $event_date = get_post_meta( get_the_ID(), '_event_date', true );
                 $events[] = [
                     'title' => get_the_title(),
-                    'url'  => get_permalink(),
-                    'start'  => $event_date,
+                    'url'   => get_permalink(),
+                    'start' => $event_date,
                 ];
             }
             wp_reset_postdata();
         }
-
+    
+        if ( empty( $events ) ) {
+            // Add a specific message to the response
+            return rest_ensure_response([
+                'message' => $date ? "No events found on $date." : 'No events found.',
+            ]);
+        }
+    
         return rest_ensure_response( $events );
     }
+    
     public static function my_enqueue_scripts() {
         
         wp_enqueue_script( 'jquery' );
