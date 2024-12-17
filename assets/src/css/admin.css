@@ -1,0 +1,49 @@
+/* Setting Page Styles */
+
+/* Title Styling */
+.events-plugin-title {
+    color: #0073aa;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Form Container */
+.events-plugin-form {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Select Field */
+.events-plugin-select {
+    width: 80%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Color Picker */
+.events-plugin-color-picker {
+    width: 10%;
+    padding: 3px;
+    border: none;
+    border-radius: 5px;
+}
+
+/* Submit Button Styling */
+.events-plugin-form input[type="submit"] {
+    background-color: #0073aa;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.events-plugin-form input[type="submit"]:hover {
+    background-color: #005177;
+}
