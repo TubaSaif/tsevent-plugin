@@ -1,7 +1,7 @@
 <?php
-// if (!defined('ABSPATH')) {
-//     exit; // Exit if accessed directly.
-// }
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
+}
 
 // Define theme color if not set
 $theme_color = $theme_color ?? '#ffffff';
@@ -42,17 +42,31 @@ wp_reset_postdata();
     <input type="text" id="event-search" placeholder="Search events..." onkeyup="filterEvents()" />
 
     <div id="event-list">
-        <?php foreach ($events as $event) : ?>
-            <div class="event-item" data-date="<?php echo esc_attr($event['date']); ?>">
-                <?php if ($event['image']) : ?>
+    <?php foreach ($events as $event) : ?>
+        <div class="event-item" data-date="<?php echo esc_attr($event['date']); ?>">
+            <?php if ($event['image']) : ?>
+                <div class="event-image-wrapper">
                     <img src="<?php echo esc_url($event['image']); ?>" alt="<?php echo esc_attr($event['title']); ?>" class="event-image" />
-                <?php endif; ?>
-                <h2><a href="<?php echo esc_url($event['url']); ?>"><?php echo esc_html($event['title']); ?></a></h2>
-                <p><strong>Date:</strong> <?php echo esc_html($event['date']); ?></p>
-                <p><?php echo esc_html($event['excerpt']); ?></p>
+                </div>
+            <?php endif; ?>
+
+            <div class="event-item-content">
+                <h2 class="event-title">
+                    <a href="<?php echo esc_url($event['url']); ?>" class="event-title-link">
+                        <?php echo esc_html($event['title']); ?>
+                    </a>
+                </h2>
+                <p class="event-date">
+                    <strong>Date:</strong> <?php echo esc_html($event['date']); ?>
+                </p>
+                <p class="event-excerpt">
+                    <?php echo esc_html($event['excerpt']); ?>
+                </p>
             </div>
-        <?php endforeach; ?>
-    </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+
 </div>
 
 <script>
@@ -74,25 +88,4 @@ wp_reset_postdata();
     }
 </script>
 
-<style>
-    /* Add some basic styling */
-    .event-item {
-        margin-bottom: 20px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-    }
-    .event-item img {
-        max-width: 150px;
-        margin-right: 15px;
-        float: left;
-    }
-    #event-search {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-</style>
+
